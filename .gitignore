@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# ignored
+.env
+src/main/resources/service-account.json
+*.json
