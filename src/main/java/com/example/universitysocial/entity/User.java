@@ -27,11 +27,17 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false, length = 50)
     private String username;
 
+    @Column(name = "nick_name")
+    private String nickName;
+
     @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "profile_image")
+    private String profileImage;
 
     @Column(name = "otp_code", length = 6)
     private String otpCode;

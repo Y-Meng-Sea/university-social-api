@@ -1,19 +1,22 @@
 package com.example.universitysocial.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "scholarships")
 @Data
 @Builder
-@Entity
-@Table(name = "posts")
-public class Post {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Scholarship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +30,9 @@ public class Post {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "link")
+    private String link;
+
     @Column(name = "created_at")
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -38,17 +44,9 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "scholarship", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Like> likes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<Share> shares = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<Save> saves = new ArrayList<>();
+    private List<ScholarshipSave> saves = new ArrayList<>();
 
     @PreUpdate
     protected void onUpdate() {
